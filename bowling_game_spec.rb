@@ -29,4 +29,12 @@ describe BowlingGame do
     game.score.should == 16
   end
 
+  it "scores a strike correctly" do
+    game.roll(10)
+    game.roll(4)
+    game.roll(3)
+    roll_many 16, 0
+    game.score.should == 24
+  end
+
 end
