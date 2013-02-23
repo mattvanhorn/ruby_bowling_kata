@@ -21,7 +21,7 @@ describe BowlingGame do
     game.score.should == 20
   end
 
-  xit "scores a spare correctly" do
+  it "scores a spare correctly" do
     game.roll(5)
     game.roll(5)
     game.roll(3)
