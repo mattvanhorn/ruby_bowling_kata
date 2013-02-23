@@ -20,4 +20,13 @@ describe BowlingGame do
     roll_many 20, 1
     game.score.should == 20
   end
+
+  it "scores a spare correctly" do
+    game.roll(5)
+    game.roll(5)
+    game.roll(3)
+    roll_many 17, 0
+    game.score.should == 16
+  end
+
 end
