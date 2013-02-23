@@ -12,10 +12,11 @@ class BowlingGame
     while @rolls.any? do
       roll1 = @rolls.shift
       roll2 = @rolls.shift
-      if roll1 + roll2 == 10
+      frame_score = roll1 + roll2
+      if frame_score == 10
         @score += (10 + @rolls.first)
       else
-        @score += (roll1 + roll2)
+        @score += frame_score
       end
     end
     @score
