@@ -3,7 +3,6 @@ class BowlingGame
   NUMBER_OF_PINS = 10
 
   def initialize
-    @score = 0
     @rolls = []
   end
 
@@ -12,10 +11,7 @@ class BowlingGame
   end
 
   def score
-    NUMBER_OF_FRAMES.times do
-      @score += score_frame
-    end
-    @score
+    NUMBER_OF_FRAMES.times.map{ score_frame }.reduce(:+)
   end
 
   private
