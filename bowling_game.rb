@@ -1,4 +1,7 @@
 class BowlingGame
+  NUMBER_OF_FRAMES = 10
+  NUMBER_OF_PINS = 10
+
   def initialize
     @score = 0
     @rolls = []
@@ -9,30 +12,56 @@ class BowlingGame
   end
 
   def score
-    10.times do
+    NUMBER_OF_FRAMES.times do
       @score += score_frame
     end
     @score
   end
 
-  def score_frame
-    if is_strike?
-      @rolls.shift + @rolls[0] + @rolls[1]
+  private
 
-    elsif is_spare?
-      @rolls.shift + @rolls.shift + @rolls[0]
+    def score_frame
+      if is_strike?
+        score_strike
 
-    else
-      @rolls.shift + @rolls.shift
+      elsif is_spare?
+        score_spare
+
+      else
+        score_normal
+      end
     end
-  end
 
-  def is_strike?
-    @rolls[0] == 10
-  end
+    def is_strike?
+      next_roll == NUMBER_OF_PINS
+    end
 
-  def is_spare?
-   !is_strike? && @rolls[0] + @rolls[1] == 10
-  end
+    def is_spare?
+     !is_strike? && next_two_rolls == NUMBER_OF_PINS
+    end
+
+    def score_strike
+      score_roll + next_two_rolls
+    end
+
+    def score_spare
+      score_normal + next_roll
+    end
+
+    def score_normal
+      score_roll + score_roll
+    end
+
+    def score_roll
+      @rolls.shift
+    end
+
+    def next_roll
+      @rolls[0]
+    end
+
+    def next_two_rolls
+      @rolls[0..1].reduce(:+)
+    end
 
 end
