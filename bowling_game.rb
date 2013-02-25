@@ -9,7 +9,7 @@ class BowlingGame
   end
 
   def score
-    while @rolls.any? do
+    10.times do
       @score += score_frame
     end
     @score
