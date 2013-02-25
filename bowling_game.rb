@@ -10,22 +10,29 @@ class BowlingGame
 
   def score
     while @rolls.any? do
-      roll1 = @rolls.shift
-      if roll1 == 10
-        # strike
-        @score += (10 + @rolls[0] + @rolls[1])
-      else
-        roll2 = @rolls.shift
-        frame_score = roll1 + roll2
-
-        if frame_score == 10
-          # spare
-          @score += (10 + @rolls.first)
-        else
-          @score += frame_score
-        end
-      end
+      @score += score_frame
     end
     @score
   end
+
+  def score_frame
+    if is_strike?
+      @rolls.shift + @rolls[0] + @rolls[1]
+
+    elsif is_spare?
+      @rolls.shift + @rolls.shift + @rolls[0]
+
+    else
+      @rolls.shift + @rolls.shift
+    end
+  end
+
+  def is_strike?
+    @rolls[0] == 10
+  end
+
+  def is_spare?
+   !is_strike? && @rolls[0] + @rolls[1] == 10
+  end
+
 end
