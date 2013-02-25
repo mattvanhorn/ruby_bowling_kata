@@ -21,15 +21,7 @@ class BowlingGame
   private
 
     def score_frame
-      if is_strike?
-        score_strike
-
-      elsif is_spare?
-        score_spare
-
-      else
-        score_normal
-      end
+      score_strike || score_spare || score_normal
     end
 
     def is_strike?
@@ -37,15 +29,15 @@ class BowlingGame
     end
 
     def is_spare?
-     !is_strike? && next_two_rolls == NUMBER_OF_PINS
+      next_two_rolls == NUMBER_OF_PINS
     end
 
     def score_strike
-      score_roll + next_two_rolls
+      is_strike? && (score_roll + next_two_rolls)
     end
 
     def score_spare
-      score_normal + next_roll
+      is_spare? && (score_normal + next_roll)
     end
 
     def score_normal
