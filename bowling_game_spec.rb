@@ -37,4 +37,9 @@ describe BowlingGame do
     game.score.should == 24
   end
 
+  it "scores a perfect game correctly" do
+    roll_many 12, 10
+    game.score.should == 300
+  end
+
 end
